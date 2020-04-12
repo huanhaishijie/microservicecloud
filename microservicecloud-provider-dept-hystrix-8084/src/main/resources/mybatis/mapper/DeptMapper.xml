@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuezhiming.springcloud.dao.DeptMapper">
+
+    <insert id="addDept" parameterType="com.yuezhiming.springcloud.entity.Dept">
+        insert into dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dName != null">
+                dname,
+            </if>
+            db_source
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{dName,jdbcType=VARCHAR},
+            </if>
+            database()
+        </trim>
+    </insert>
+
+    <select id="findAll" resultType="com.yuezhiming.springcloud.entity.Dept">
+        select * from dept
+    </select>
+
+
+</mapper>

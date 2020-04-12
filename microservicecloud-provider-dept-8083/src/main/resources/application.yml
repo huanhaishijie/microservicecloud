@@ -1,0 +1,39 @@
+server:
+  port: 8083
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.yuezhiming.springcloud.entity
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+
+spring:
+  application:
+    name: microservicecloud-provider-dept
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo3?serverTimezone=UTC&useSSL=true
+    username: root
+    password: YZM1114
+    dbcp2:
+      min-idle: 5
+      initial-size: 10
+      max-total: 5
+      max-wait-millis: 200
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone:  http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: dept-provider8083 #自定义服务的名称
+    prefer-ip-address: true #访问路径时可以显示IP地址
+info:
+  app.name: dept-provider
+  build.version: $project.version$
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
